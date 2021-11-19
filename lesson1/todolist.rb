@@ -138,6 +138,18 @@ class TodoList
     select{|item| !item.done?}
   end
   
+  def mark_done(str)
+    find_by_title(str).done!
+  end
+  
+  def mark_all_done
+    done!
+  end
+  
+  def mark_all_undone
+    each{|item| item.undone!}
+  end
+  
   private
   attr_reader :todos
 end
@@ -154,7 +166,15 @@ list.add(todo3)
 
 puts list.find_by_title("buy milk")
 
-list.mark_done_at(1)
+list.mark_done("buy milk")
 
 puts list.all_done
+puts list.all_not_done
+
+list.mark_all_done
+
+puts list.all_done
+
+list.mark_all_undone
+
 puts list.all_not_done
