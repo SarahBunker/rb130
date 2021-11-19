@@ -51,11 +51,13 @@ class TodoList
   end
 
   def add(todo)
-    begin
-      todo.class == Todo ? todos << todo : (raise TypeError.new("Can only add Todo objects"))
-    rescue TypeError => e
-      puts e.message
-    end
+    raise TypeError.new("Can only add Todo objects") unless todo.instance_of? Todo
+    # begin
+    #   todo.class == Todo ?  : (raise TypeError.new("Can only add Todo objects"))
+    # rescue TypeError => e
+    #   puts e.message
+    # end
+    todos << todo
   end
   
   def <<(todo)
@@ -95,7 +97,8 @@ class TodoList
   end
   
   def done!
-    todos.each{|item| item.done!}
+    todos.each_index{|i| mark_done_at(i)}
+    # todos.each{|item| item.done!}
   end
   
   def shift
@@ -134,13 +137,13 @@ list = TodoList.new("Today's Todos")
 list.add(todo1)                 # adds todo1 to end of list, returns list
 list.add(todo2)                 # adds todo2 to end of list, returns list
 list.add(todo3)                 # adds todo3 to end of list, returns list
-list.add(1)                     # raises TypeError with message "Can only add Todo objects"
+# list.add(1)                     # raises TypeError with message "Can only add Todo objects"
 
 # <<
 # same behavior as add
 todo4 = Todo.new("Do the dishes")
 list << todo4
-list << 4
+# list << 4
 
 # # ---- Interrogating the list -----
 
