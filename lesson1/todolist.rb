@@ -115,7 +115,7 @@ class TodoList
   end
   
   def to_s
-    text = "---- Today's Todos ----"
+    text = "---- #{title} ----\n"
     text << todos.map(&:to_s).join("\n")
   end
   
@@ -215,7 +215,7 @@ p list.done?                     # returns true if all todos in the list are don
 # ---- Outputting the list -----
 
 # to_s
-list.to_s                      # returns string representation of the list
+puts list.to_s                      # returns string representation of the list
 
 # # ---- Today's Todos ----
 # # [ ] Buy milk
