@@ -125,8 +125,8 @@ class TodoList
     list
   end
   
-  def find_by_title(str)
-    select{|item| item.title.downcase == str.downcase}.first
+  def find_by_title(title)
+    select{|item| item.title.downcase == title.downcase}.first
   end
   
   def all_done
@@ -137,8 +137,8 @@ class TodoList
     select{|item| !item.done?}
   end
   
-  def mark_done(str)
-    find_by_title(str).done!
+  def mark_done(title)
+    find_by_title(title) && find_by_title(title).done!
   end
   
   def mark_all_done
