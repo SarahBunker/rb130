@@ -126,8 +126,7 @@ class TodoList
   end
   
   def find_by_title(str)
-    each{|item| return item if item.title.downcase == str.downcase}
-    nil
+    select{|item| item.title.downcase == str.downcase}.first
   end
   
   def all_done
