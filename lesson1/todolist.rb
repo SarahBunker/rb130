@@ -72,7 +72,7 @@ class TodoList
   end
   
   def to_a
-    todos
+    todos.clone
   end
   
   def done?
@@ -114,8 +114,11 @@ class TodoList
     text << todos.map(&:to_s).join("\n")
   end
   
-  private
+  def each
+    todos.each{|item| yield(item) }
+  end
   
+  private
   attr_reader :todos
 end
 
