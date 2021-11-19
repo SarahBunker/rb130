@@ -21,8 +21,12 @@ end
 =end
 
 
-def reduce(array, acc = 0)
+def reduce(array, acc = nil)
   i = 0
+  if acc == nil
+    acc = array[0]
+    i += 1
+  end
   len = array.size
   while i < len do
     acc = yield(acc, array[i])
@@ -38,3 +42,6 @@ p reduce(array, 10) { |acc, num| acc + num }                # => 25
 # reduce(array) { |acc, num| acc + num if num.odd? }        # => NoMethodError: undefined method `+' for nil:NilClass
 
 # note this example doesn't include some of the flexibility of the #reduce method, but this example was to practice yeilding to blocks
+
+p reduce(['a', 'b', 'c']) { |acc, value| acc += value }     # => 'abc'
+p reduce([[1, 2], ['a', 'b']]) { |acc, value| acc + value } # => [1, 2, 'a', 'b']
