@@ -98,7 +98,6 @@ class TodoList
   
   def done!
     todos.each_index{|i| mark_done_at(i)}
-    # todos.each{|item| item.done!}
   end
   
   def shift
@@ -110,6 +109,7 @@ class TodoList
   end
   
   def remove_at(i)
+    # todos.delete(item_at(i))
     item_at(i)
     todos.delete_at(i)
   end
@@ -130,6 +130,17 @@ todo1 = Todo.new("Buy milk")
 todo2 = Todo.new("Clean room")
 todo3 = Todo.new("Go to gym")
 list = TodoList.new("Today's Todos")
+
+list2 = TodoList.new("A List")
+list2 << todo1
+list2 << todo2
+list2 << todo2
+list2 << todo3
+
+puts list2
+list2.remove_at(1)
+puts list2
+
 
 # ---- Adding to the list -----
 
