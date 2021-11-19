@@ -52,7 +52,7 @@ class TodoList
 
   def add(todo)
     begin
-      todo.class == Todo ? @todos << todo : (raise TypeError.new("Can only add Todo objects"))
+      todo.class == Todo ? todos << todo : (raise TypeError.new("Can only add Todo objects"))
     rescue TypeError => e
       puts e.message
     end
@@ -61,7 +61,39 @@ class TodoList
   def <<(todo)
     add(todo)
   end
-
+  
+  def size
+    todos.size
+  end
+  
+  def first
+    todos.first
+  end
+  
+  def last
+    todos.last
+  end
+  
+  def to_a
+    todos
+  end
+  
+  def done?
+    todos.all?{|todo| todo.done?}
+  end
+  
+  def item_at(i)
+    valid_i = (0...todos.size).to_a
+    valid_i.include?(i) ? (return todos[i]) : (raise IndexError.new)
+  end
+  
+  def mark_done_at(i)
+    item_at(i).done!
+  end
+  
+  private
+  
+  attr_reader :todos
 end
 
 
@@ -87,33 +119,33 @@ list << 4
 
 # # ---- Interrogating the list -----
 
-# # size
-# list.size                       # returns 3
+# size
+p list.size == 4                      # returns 3
 
 # # first
-# list.first                      # returns todo1, which is the first item in the list
+p list.first == todo1                     # returns todo1, which is the first item in the list
 
 # # last
-# list.last                       # returns todo3, which is the last item in the list
+p list.last == todo4                       # returns todo4, which is the last item in the list
 
 # #to_a
-# list.to_a                      # returns an array of all items in the list
+puts list.to_a                      # returns an array of all items in the list
 
-# #done?
-# list.done?                     # returns true if all todos in the list are done, otherwise false
+#done?
+p list.done?                     # returns true if all todos in the list are done, otherwise false
 
-# # ---- Retrieving an item in the list ----
+# ---- Retrieving an item in the list ----
 
-# # item_at
-# list.item_at                    # raises ArgumentError
-# list.item_at(1)                 # returns 2nd item in list (zero based index)
-# list.item_at(100)               # raises IndexError
+# item_at
+# p list.item_at                    # raises ArgumentError
+list.item_at(1)                 # returns 2nd item in list (zero based index)
+# p list.item_at(100)               # raises IndexError
 
 # # ---- Marking items in the list -----
 
-# # mark_done_at
+# mark_done_at
 # list.mark_done_at               # raises ArgumentError
-# list.mark_done_at(1)            # marks the 2nd item as done
+list.mark_done_at(1)            # marks the 2nd item as done
 # list.mark_done_at(100)          # raises IndexError
 
 # # mark_undone_at
