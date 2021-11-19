@@ -91,6 +91,14 @@ class TodoList
     item_at(i).done!
   end
   
+  def mark_undone_at(i)
+    item_at(i).undone!
+  end
+  
+  def done!
+    todos.each{|item| item.done!}
+  end
+  
   private
   
   attr_reader :todos
@@ -146,16 +154,18 @@ list.item_at(1)                 # returns 2nd item in list (zero based index)
 # mark_done_at
 # list.mark_done_at               # raises ArgumentError
 list.mark_done_at(1)            # marks the 2nd item as done
-# list.mark_done_at(100)          # raises IndexError
+# list.mark_done_at(100)          # raises IndexError\
+# puts list.to_a
 
-# # mark_undone_at
+# mark_undone_at
 # list.mark_undone_at             # raises ArgumentError
-# list.mark_undone_at(1)          # marks the 2nd item as not done,
+list.mark_undone_at(1)          # marks the 2nd item as not done,
 # list.mark_undone_at(100)        # raises IndexError
+# puts list.to_a
 
 # # done!
-# list.done!                      # marks all items as done
-
+list.done!                      # marks all items as done
+puts list.to_a
 # # ---- Deleting from the list -----
 
 # # shift
