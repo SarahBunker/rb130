@@ -116,12 +116,26 @@ class TodoList
   
   def each
     todos.each{|item| yield(item) }
+    self
   end
   
   def select
     list = TodoList.new(title)
     each{|item| list << item if yield(item)}
     list
+  end
+  
+  def find_by_title(str)
+    each{|item| return item if item.title.downcase == str.downcase}
+    nil
+  end
+  
+  def all_done
+    select{|item| item.done?}
+  end
+  
+  def all_not_done
+    select{|item| !item.done?}
   end
   
   private
@@ -138,8 +152,9 @@ list.add(todo1)
 list.add(todo2)
 list.add(todo3)
 
-todo1.done!
+puts list.find_by_title("buy milk")
 
-results = list.select { |todo| todo.done? }    # you need to implement this method
+list.mark_done_at(1)
 
-puts results.inspect
+puts list.all_done
+puts list.all_not_done
