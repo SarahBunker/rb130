@@ -99,6 +99,19 @@ class TodoList
     todos.each{|item| item.done!}
   end
   
+  def shift
+    todos.shift
+  end
+  
+  def pop
+    todos.pop
+  end
+  
+  def remove_at(i)
+    item_at(i)
+    todos.delete_at(i)
+  end
+  
   private
   
   attr_reader :todos
@@ -165,18 +178,19 @@ list.mark_undone_at(1)          # marks the 2nd item as not done,
 
 # # done!
 list.done!                      # marks all items as done
-puts list.to_a
+# puts list.to_a
 # # ---- Deleting from the list -----
 
-# # shift
-# list.shift                      # removes and returns the first item in list
+# shift
+p list.shift == todo1                      # removes and returns the first item in list
+# puts list.to_a
 
-# # pop
-# list.pop                        # removes and returns the last item in list
-
-# # remove_at
+# pop
+p list.pop == todo4 # removes and returns the last item in list
+puts list.to_a
+# remove_at
 # list.remove_at                  # raises ArgumentError
-# list.remove_at(1)               # removes and returns the 2nd item
+p list.remove_at(1) == todo3               # removes and returns the 2nd item
 # list.remove_at(100)             # raises IndexError
 
 # # ---- Outputting the list -----
