@@ -83,8 +83,7 @@ class TodoList
   end
   
   def item_at(i)
-    valid_i = (0...todos.size).to_a
-    valid_i.include?(i) ? (return todos[i]) : (raise IndexError.new)
+    todos.fetch(i)
   end
   
   def mark_done_at(i)
@@ -110,6 +109,11 @@ class TodoList
   def remove_at(i)
     item_at(i)
     todos.delete_at(i)
+  end
+  
+  def to_s
+    text = "---- Today's Todos ----"
+    text << todos.map(&:to_s).join("\n")
   end
   
   private
@@ -159,44 +163,45 @@ p list.done?                     # returns true if all todos in the list are don
 
 # item_at
 # p list.item_at                    # raises ArgumentError
-list.item_at(1)                 # returns 2nd item in list (zero based index)
+# list.item_at(1)                 # returns 2nd item in list (zero based index)
 # p list.item_at(100)               # raises IndexError
 
 # # ---- Marking items in the list -----
 
 # mark_done_at
 # list.mark_done_at               # raises ArgumentError
-list.mark_done_at(1)            # marks the 2nd item as done
+# list.mark_done_at(1)            # marks the 2nd item as done
 # list.mark_done_at(100)          # raises IndexError\
 # puts list.to_a
 
 # mark_undone_at
 # list.mark_undone_at             # raises ArgumentError
-list.mark_undone_at(1)          # marks the 2nd item as not done,
+# list.mark_undone_at(1)          # marks the 2nd item as not done,
 # list.mark_undone_at(100)        # raises IndexError
 # puts list.to_a
 
 # # done!
-list.done!                      # marks all items as done
+# list.done!                      # marks all items as done
 # puts list.to_a
 # # ---- Deleting from the list -----
 
 # shift
-p list.shift == todo1                      # removes and returns the first item in list
+# p list.shift == todo1                      # removes and returns the first item in list
 # puts list.to_a
 
 # pop
-p list.pop == todo4 # removes and returns the last item in list
-puts list.to_a
+# p list.pop == todo4 # removes and returns the last item in list
+# puts list.to_a
+
 # remove_at
 # list.remove_at                  # raises ArgumentError
-p list.remove_at(1) == todo3               # removes and returns the 2nd item
+# p list.remove_at(1) == todo3               # removes and returns the 2nd item
 # list.remove_at(100)             # raises IndexError
 
-# # ---- Outputting the list -----
+# ---- Outputting the list -----
 
-# # to_s
-# list.to_s                      # returns string representation of the list
+# to_s
+list.to_s                      # returns string representation of the list
 
 # # ---- Today's Todos ----
 # # [ ] Buy milk
