@@ -119,9 +119,9 @@ class TodoList
   end
   
   def select
-    results = []
-    each{|item| results << item if yield(item)}
-    results
+    list = TodoList.new(title)
+    each{|item| list << item if yield(item)}
+    list
   end
   
   private
