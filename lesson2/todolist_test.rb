@@ -1,6 +1,9 @@
+require 'simplecov'
+SimpleCov.start
 require 'minitest/autorun'
 require "minitest/reporters"
 Minitest::Reporters.use!
+
 
 require_relative 'todolist'
 
@@ -95,6 +98,46 @@ class TodoListTest < MiniTest::Test
     assert_equal(true, list.done?)
   end
   
+  def test_mark_all_done
+    list.mark_all_done
+    assert_equal(true, todo1.done?)
+    assert_equal(true, todo2.done?)
+    assert_equal(true, todo3.done?)
+    assert_equal(true, list.done?)
+  end
+  
+  def test_mark_all_undone
+    list.mark_all_undone
+    assert_equal(false, todo1.done?)
+    assert_equal(false, todo2.done?)
+    assert_equal(false, todo3.done?)
+    assert_equal(false, list.done?)
+  end
+  
+  def test_mark_done_no_match
+    list.mark_done("buymilk")
+    assert_equal(false, todo1.done?)
+    assert_equal(false, todo2.done?)
+    assert_equal(false, todo3.done?)
+    assert_equal(false, list.done?)
+  end
+  
+  def test_mark_done
+    list.mark_done("Buy milk")
+    assert_equal(true, todo1.done?)
+    assert_equal(false, todo2.done?)
+    assert_equal(false, todo3.done?)
+    assert_equal(false, list.done?)
+  end
+  
+  def test_mark_done
+    list.mark_done("buy MilK")
+    assert_equal(true, todo1.done?)
+    assert_equal(false, todo2.done?)
+    assert_equal(false, todo3.done?)
+    assert_equal(false, list.done?)
+  end
+  
   def test_remove_at
     assert_raises(IndexError) {list.remove_at(3) }
     list.remove_at(0)
@@ -162,6 +205,33 @@ class TodoListTest < MiniTest::Test
     assert_equal(todos3, list.select{|i| i.done?}.to_a)
   end
   
+  def test_all_done
+    a_list = TodoList.new("")
+    a_list.add(todo3)
+    list.mark_done_at(2)
+    assert_equal(a_list.to_a,list.all_done.to_a)
+  end
+  
+  def test_all_done_return_list
+    assert_instance_of(TodoList, list.all_done)
+  end
+  
+  def test_all_undone
+    a_list = TodoList.new("")
+    a_list.add(todo1)
+    a_list.add(todo2)
+    list.mark_done_at(2)
+    assert_equal(a_list.to_a,list.all_not_done.to_a)
+  end
+  
+  def test_all_undone_return_list
+    assert_instance_of(TodoList, list.all_not_done)
+  end
+  
+  def test_find_by_title
+    assert_equal(todo1, list.find_by_title("Buy milk"))
+    assert_equal(nil,   list.find_by_title("a cow"))
+  end
   
   private
   attr_reader :todo1, :todo2, :todo3, :todos, :list, :todos2, :todos3, :todos4
