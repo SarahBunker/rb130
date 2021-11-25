@@ -1,6 +1,6 @@
 require "pry"
 
-def decrypt(string, &algo)
+def decrypt(string, algo)
   new_string = ""
   string.chars.each do |char|
     new_string << algo.call(char)
