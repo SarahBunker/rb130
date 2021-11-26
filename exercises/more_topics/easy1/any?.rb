@@ -1,5 +1,5 @@
 
-def any?(collection,&block)
+def any?(collection, &block)
   collection.each { |item| return true if block.call(item) }
   false
 end
