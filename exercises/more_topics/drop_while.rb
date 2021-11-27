@@ -14,7 +14,6 @@ def drop_while(array, &block)
   while index < array.size && block.call(array[index])
     index += 1
   end
-  
   array[index..-1]
 end
 
