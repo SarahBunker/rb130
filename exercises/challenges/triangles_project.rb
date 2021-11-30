@@ -56,23 +56,20 @@ accessors: sides array- reader
 class Triangle
   TYPES = {1 => "equilateral", 2 => "isosceles", 3 => "scalene"}
   def initialize(a, b, c)
-    @sides = [a, b, c]
+    @sides = [a, b, c].sort!
     valid_triangle
   end
   
   def valid_triangle
-    raise ArgumentError unless sides_have_length && inequality
+    raise ArgumentError.new "Invalid triangle lengths" unless sides_have_length? && inequality?
   end
   
-  def sides_have_length
+  def sides_have_length?
     sides.all? {|side| side > 0}
   end
   
-  def inequality
-    first_two = sides[0] + sides[1] > sides[2]
-    first_last = sides[0] + sides[2] > sides[1]
-    last_two = sides[1] + sides[2] > sides[0]
-    first_two && first_last && last_two
+  def inequality?
+    sides[0] + sides[1] > sides[2]
   end
   
   def kind
