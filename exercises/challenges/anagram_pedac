@@ -1,0 +1,46 @@
+=begin
+#-------------------------------------------------
+PROBLEM:
+given a word find all the anagrams from a given list of words
+
+input: intialize(string)
+match(array of strings)
+output:array of only strings that are anagrams
+
+mutating?
+rules:
+  Explicit requirements:
+    
+  Implicit requirements:
+    letters in original must be same in anagrams
+      same letter and same number of letter
+      identical words are not anagrams
+      can't have extra letters
+      case insensitive
+      
+    checksum?
+Unclear parts of problem?
+Edge cases?
+#-------------------------------------------------
+EXAMPLES
+
+#-------------------------------------------------
+DATA STRUCTURE
+
+
+#-------------------------------------------------
+ALGORITHM
+example:
+create Anagram class
+#initialize(word)
+#match(array)
+  initialize empty results array
+  itterate through input array
+    compare current word to initial word
+      compare sorted character array
+      add to result array if same
+  return result array
+
+=end
+
+
