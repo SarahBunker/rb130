@@ -1,16 +1,10 @@
 class Diamond
-  # def initialize(letter)
-  #   @letter
-  # end
-  
   def self.make_diamond(letter)
     return "A\n" if letter == "A"
     diamond = []
     width = ("A"..letter).to_a.size*2 - 1
     middle_space = 1
     ("A"..letter).to_a.each_with_index do |current_letter, index|
-      # p current_letter
-      # p index
       if current_letter == "A"
         diamond << "A".center(width)
       else
