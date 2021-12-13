@@ -82,6 +82,27 @@ call verses(99,0)
 
 instance methods:
 
+
+
+-------------------------------
+::verse(num_bottles_of_beer)
+case statements
+99 to 3 bottles
+2
+1
+0
+create strings of verses
+
+::verses(first_verse, last_verse)
+song = ""
+iterate from first_verse to last_verse
+  add each verse to song
+  add newline except on last iteration
+return song
+
+
+lyrics()
+call verses(99,0)
 =end
 
 
